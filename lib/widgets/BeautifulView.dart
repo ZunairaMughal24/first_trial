@@ -29,8 +29,8 @@ class BeautifulView extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
-          fontSize: size ?? 16,
-          color: Colors.white,
+          fontSize: size ?? 18,
+          color: Colors.black,
           fontFamily: fontFamily,
         ),
       ),
