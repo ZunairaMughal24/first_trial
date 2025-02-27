@@ -1,0 +1,39 @@
+import 'package:flutter/material.dart';
+
+class BeautifulView extends StatelessWidget {
+  final String title;
+  final Color? color;
+  final double? size;
+  final double? borderRadius;
+  final EdgeInsets? padding;
+  final String fontFamily;
+
+  const BeautifulView({
+    required this.title,
+    this.color = Colors.blue,
+    this.size,
+    this.borderRadius,
+    this.padding,
+    this.fontFamily = "Arial",
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: padding ?? EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(borderRadius ?? 0),
+      ),
+      child: Text(
+        title,
+        style: TextStyle(
+          fontSize: size ?? 16,
+          color: Colors.white,
+          fontFamily: fontFamily,
+        ),
+      ),
+    );
+  }
+}
