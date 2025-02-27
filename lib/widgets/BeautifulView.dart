@@ -23,7 +23,7 @@ class BeautifulView extends StatelessWidget {
     return Container(
       padding: padding ?? EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(borderRadius ?? 0),
       ),
       child: Text(
