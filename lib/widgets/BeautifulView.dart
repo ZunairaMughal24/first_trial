@@ -25,7 +25,7 @@ class _BeautifulViewState extends State<BeautifulView> {
       log("Fields cannot be empty!");
       Fluttertoast.showToast(
         msg: "Fields cannot be empty!",
-        backgroundColor: const Color.fromARGB(255, 225, 244, 54),
+        backgroundColor: const Color.fromARGB(255, 157, 173, 5),
         gravity: ToastGravity.TOP,
       );
       return;
@@ -35,7 +35,7 @@ class _BeautifulViewState extends State<BeautifulView> {
     if (RegExp(r'[^a-zA-Z0-9 ]').hasMatch(name)) {
       log("Name contains special characters!");
       Fluttertoast.showToast(
-        msg: "Special characters are not allowed!",
+        msg: "Special characters are not allowed in Name!",
         backgroundColor: Colors.red,
         gravity: ToastGravity.TOP,
       );
@@ -77,8 +77,17 @@ class _BeautifulViewState extends State<BeautifulView> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.grey,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      spreadRadius: 1,
+                      blurRadius: 6,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
                 ),
                 height: 50,
+                   width: 330,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
@@ -104,6 +113,7 @@ class _BeautifulViewState extends State<BeautifulView> {
                   color: Colors.grey,
                 ),
                 height: 50,
+                   width: 330,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
