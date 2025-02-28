@@ -19,8 +19,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: BeautifulView(
-          title: "Beautiful View",
-          buttonText: "Beautiful-Button",
+       
         ));
   }
 }
