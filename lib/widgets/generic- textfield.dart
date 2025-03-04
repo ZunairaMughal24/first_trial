@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
 
-class Generictextfield extends StatelessWidget {
+class Generictextfield extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final bool isPassword;
-  final bool isVisible;
-  final VoidCallback? toggleVisibility;
 
   Generictextfield({
     required this.controller,
     required this.hintText,
     this.isPassword = false,
-    this.isVisible = true,
-    this.toggleVisibility,
   });
+
+  @override
+  State<Generictextfield> createState() => _GenerictextfieldState();
+}
+
+class _GenerictextfieldState extends State<Generictextfield> {
+  bool isVisible = true;
+  @override
+  void initState() {
+    super.initState();
+    isVisible =
+        widget.isPassword; // Initialize visibility based on password field
+  }
+
+  void _toggleVisibility() {
+    setState(() {
+      isVisible = !isVisible;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,20 +44,20 @@ class Generictextfield extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextField(
-            controller: controller,
-            obscureText: isPassword ? isVisible : false,
+            controller: widget.controller,
+            obscureText: widget.isPassword ? isVisible : false,
             decoration: InputDecoration(
-              suffixIcon: isPassword
+              suffixIcon: widget.isPassword
                   ? IconButton(
                       icon: Icon(
                         isVisible ? Icons.visibility_off : Icons.visibility,
                         color: Colors.black54,
                       ),
-                      onPressed: toggleVisibility,
+                      onPressed: _toggleVisibility,
                     )
                   : null,
               border: InputBorder.none,
-              hintText: hintText,
+              hintText: widget.hintText,
               hintStyle: TextStyle(
                 color: const Color.fromARGB(255, 121, 116, 116),
                 fontSize: 18,

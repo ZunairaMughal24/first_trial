@@ -77,14 +77,12 @@ class _BeautifulViewState extends State<BeautifulView> {
             Generictextfield(
               controller: _nameController,
               isPassword: false,
-              isVisible: true,
               hintText: "Enter Name",
             ),
             SizedBox(height: 15),
             Generictextfield(
               controller: _passwordController,
               isPassword: true,
-              isVisible: true,
               hintText: "Enter your password",
             ),
             SizedBox(height: 60),
