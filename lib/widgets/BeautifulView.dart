@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:first_trial/widgets/generic-Textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -37,7 +38,7 @@ class _BeautifulViewState extends State<BeautifulView> {
       Fluttertoast.showToast(
         msg: "Special characters are not allowed in Name!",
         backgroundColor: Colors.red,
-        gravity: ToastGravity.Top,
+        gravity: ToastGravity.TOP,
       );
       return;
     }
@@ -66,83 +67,38 @@ class _BeautifulViewState extends State<BeautifulView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: const Color.fromARGB(255, 168, 225, 253),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.grey,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      spreadRadius: 1,
-                      blurRadius: 6,
-                      offset: Offset(2, 2),
-                    ),
-                  ],
-                ),
-                height: 50,
-                   width: 330,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Enter your name",
-                      hintStyle: TextStyle(
-                        color: const Color.fromARGB(255, 121, 116, 116),
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 15),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.grey,
-                ),
-                height: 50,
-                   width: 330,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    obscureText: isVisible,
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          isVisible ? Icons.visibility_off : Icons.visibility,
-                          color: Colors.black54,
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.grey,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 6,
+                          offset: Offset(2, 2),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            isVisible = !isVisible;
-                          });
-                        },
-                      ),
-                      border: InputBorder.none,
-                      hintText: "Enter your password",
-                      hintStyle: TextStyle(
-                        color: const Color.fromARGB(255, 121, 116, 116),
-                        fontSize: 18,
-                      ),
+                      ],
                     ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 60),
+                    height: 65,
+                    width: 330,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CustomTextField(
+                        controller: _nameController,
+                        isVisible: true,
+                        isPassword: false,
+                        hintText: 'Enter your name',
+                      ),
+                    ))),
+            SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: GestureDetector(
