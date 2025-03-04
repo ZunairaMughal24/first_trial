@@ -37,7 +37,7 @@ class _BeautifulViewState extends State<BeautifulView> {
       Fluttertoast.showToast(
         msg: "Special characters are not allowed in Name!",
         backgroundColor: Colors.red,
-        gravity: ToastGravity.TOP,
+        gravity: ToastGravity.Top,
       );
       return;
     }
