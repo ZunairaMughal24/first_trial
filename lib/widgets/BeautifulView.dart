@@ -1,4 +1,7 @@
 import 'dart:developer';
+
+import 'package:first_trial/widgets/generic-%20textfield.dart';
+import 'package:first_trial/widgets/generic-textButton.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -71,98 +74,21 @@ class _BeautifulViewState extends State<BeautifulView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.grey,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      spreadRadius: 1,
-                      blurRadius: 6,
-                      offset: Offset(2, 2),
-                    ),
-                  ],
-                ),
-                height: 50,
-                   width: 330,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Enter your name",
-                      hintStyle: TextStyle(
-                        color: const Color.fromARGB(255, 121, 116, 116),
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            Generictextfield(
+              controller: _nameController,
+              isPassword: false,
+              isVisible: true,
+              hintText: "Enter Name",
             ),
             SizedBox(height: 15),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.grey,
-                ),
-                height: 50,
-                   width: 330,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    obscureText: isVisible,
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          isVisible ? Icons.visibility_off : Icons.visibility,
-                          color: Colors.black54,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            isVisible = !isVisible;
-                          });
-                        },
-                      ),
-                      border: InputBorder.none,
-                      hintText: "Enter your password",
-                      hintStyle: TextStyle(
-                        color: const Color.fromARGB(255, 121, 116, 116),
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            Generictextfield(
+              controller: _passwordController,
+              isPassword: true,
+              isVisible: true,
+              hintText: "Enter your password",
             ),
             SizedBox(height: 60),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: GestureDetector(
-                onTap: _validateAndSubmit,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: const Color.fromARGB(255, 6, 30, 82),
-                  ),
-                  height: 50,
-                  width: 330,
-                  child: Center(
-                    child: Text(
-                      "Submit",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            GenericTextButton(text: "Submit", onPressed: _validateAndSubmit)
           ],
         ),
       ),
