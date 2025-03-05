@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:first_trial/widgets/generic-%20textfield.dart';
-import 'package:first_trial/widgets/generic-textButton.dart';
+import 'package:first_trial/widgets/genericTextfield.dart';
+import 'package:first_trial/widgets/genericTextButton.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -11,6 +11,7 @@ class BeautifulView extends StatefulWidget {
 }
 
 class _BeautifulViewState extends State<BeautifulView> {
+  TextEditingController _EmailController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   FocusNode _nameFocus = FocusNode();
@@ -19,13 +20,14 @@ class _BeautifulViewState extends State<BeautifulView> {
 
   void _validateAndSubmit() {
     log(" Validate and Submit Called");
+    String email = _EmailController.text.trim();
     String name = _nameController.text.trim();
     String password = _passwordController.text.trim();
-
+    log("Name Entered: $email");
     log("Name Entered: $name");
     log("Password Entered: $password");
 
-    if (name.isEmpty || password.isEmpty) {
+    if (name.isEmpty || password.isEmpty || email.isEmpty) {
       log("Fields cannot be empty!");
       Fluttertoast.showToast(
         msg: "Fields cannot be empty!",
@@ -75,24 +77,75 @@ class _BeautifulViewState extends State<BeautifulView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey,
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Align(
+              alignment: Alignment.centerLeft, // Aligns text to the right
+              child: Text(
+                "Email",
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 6, 30, 82),
+                ),
+              ),
+            ),
+            SizedBox(height: 5),
             Generictextfield(
-              controller: _nameController,
-              focusNode: _nameFocus,
-              nextFocusNode: _passwordFocus, // Move focus to password field
+              controller: _EmailController,
+              icon: Icons.email,
+              // Move focus to password field
               onKeyboardClick: _handleKeyboardClick,
               isPassword: false,
-              hintText: "Enter Name",
+              textInputAction: TextInputAction.next,
+              hintText: "Enter email",
+              // LabelText: "Email",
+              keyboardType: TextInputType.emailAddress,
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 10),
+            Text(
+              "Name",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
+                color: const Color.fromARGB(255, 6, 30, 82),
+              ),
+            ),
+            SizedBox(height: 5),
+            Generictextfield(
+              icon: Icons.person,
+              controller: _nameController,
+              // Move focus to password field
+              onKeyboardClick: _handleKeyboardClick,
+              isPassword: false,
+              textInputAction: TextInputAction.next,
+              hintText: "Enter Name",
+              // LabelText: "Name",
+              keyboardType: TextInputType.name,
+            ),
+            SizedBox(height: 10),
+            Text(
+              "Password",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
+                color: const Color.fromARGB(255, 6, 30, 82),
+              ),
+              textAlign: TextAlign.left,
+            ),
+            SizedBox(height: 5),
             Generictextfield(
               controller: _passwordController,
               isPassword: true,
               hintText: "Enter your password",
-              focusNode: _passwordFocus,
+              icon: Icons.lock,
+              // LabelText: "password",
+              textInputAction: TextInputAction.done,
+              keyboardType: TextInputType.visiblePassword,
               onKeyboardClick: _handleKeyboardClick,
               onSubmitted: _validateAndSubmit, // Call validation on Enter
             ),
