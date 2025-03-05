@@ -17,7 +17,14 @@ class _BeautifulViewState extends State<BeautifulView> {
   FocusNode _nameFocus = FocusNode();
   FocusNode _passwordFocus = FocusNode();
   bool isVisible = true;
-
+String? emailError, nameError, passwordError;
+  bool _isValidEmail(String email) {
+    final emailRegExp = RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+    return emailRegExp.hasMatch(email);
+  }
+   bool _isValidName(String name) {
+    return !RegExp(r'[^a-zA-Z0-9 ]').hasMatch(name);
+  }
   void _validateAndSubmit() {
     log(" Validate and Submit Called");
     String email = _emailController.text.trim();
