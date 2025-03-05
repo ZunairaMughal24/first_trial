@@ -11,7 +11,7 @@ class BeautifulView extends StatefulWidget {
 }
 
 class _BeautifulViewState extends State<BeautifulView> {
-  TextEditingController _EmailController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   FocusNode _nameFocus = FocusNode();
@@ -20,7 +20,7 @@ class _BeautifulViewState extends State<BeautifulView> {
 
   void _validateAndSubmit() {
     log(" Validate and Submit Called");
-    String email = _EmailController.text.trim();
+    String email = _emailController.text.trim();
     String name = _nameController.text.trim();
     String password = _passwordController.text.trim();
     log("Name Entered: $email");
@@ -69,10 +69,6 @@ class _BeautifulViewState extends State<BeautifulView> {
     log("Final Submitted Password: $password");
   }
 
-  void _handleKeyboardClick() {
-    log("Keyboard clicked on TextField");
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,10 +92,10 @@ class _BeautifulViewState extends State<BeautifulView> {
             ),
             SizedBox(height: 5),
             Generictextfield(
-              controller: _EmailController,
+              controller: _emailController,
               icon: Icons.email,
               // Move focus to password field
-              onKeyboardClick: _handleKeyboardClick,
+
               isPassword: false,
               textInputAction: TextInputAction.next,
               hintText: "Enter email",
@@ -120,7 +116,7 @@ class _BeautifulViewState extends State<BeautifulView> {
               icon: Icons.person,
               controller: _nameController,
               // Move focus to password field
-              onKeyboardClick: _handleKeyboardClick,
+
               isPassword: false,
               textInputAction: TextInputAction.next,
               hintText: "Enter Name",
@@ -146,7 +142,7 @@ class _BeautifulViewState extends State<BeautifulView> {
               // LabelText: "password",
               textInputAction: TextInputAction.done,
               keyboardType: TextInputType.visiblePassword,
-              onKeyboardClick: _handleKeyboardClick,
+
               onSubmitted: _validateAndSubmit, // Call validation on Enter
             ),
             SizedBox(height: 60),

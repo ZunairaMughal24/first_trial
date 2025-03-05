@@ -8,7 +8,7 @@ class Generictextfield extends StatefulWidget {
   final IconData? icon;
   final TextInputType keyboardType;
   final VoidCallback? onSubmitted;
-  final VoidCallback? onKeyboardClick;
+
   final TextInputAction? textInputAction;
   Generictextfield(
       {required this.controller,
@@ -18,7 +18,6 @@ class Generictextfield extends StatefulWidget {
       this.icon,
       this.keyboardType = TextInputType.text,
       this.onSubmitted,
-      this.onKeyboardClick,
       this.textInputAction});
 
   @override
