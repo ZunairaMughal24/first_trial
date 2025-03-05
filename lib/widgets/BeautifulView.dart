@@ -13,7 +13,8 @@ class BeautifulView extends StatefulWidget {
 class _BeautifulViewState extends State<BeautifulView> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-
+  FocusNode _nameFocus = FocusNode();
+  FocusNode _passwordFocus = FocusNode();
   bool isVisible = true;
 
   void _validateAndSubmit() {
@@ -66,6 +67,10 @@ class _BeautifulViewState extends State<BeautifulView> {
     log("Final Submitted Password: $password");
   }
 
+  void _handleKeyboardClick() {
+    log("Keyboard clicked on TextField");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +81,9 @@ class _BeautifulViewState extends State<BeautifulView> {
           children: [
             Generictextfield(
               controller: _nameController,
+              focusNode: _nameFocus,
+              nextFocusNode: _passwordFocus, // Move focus to password field
+              onKeyboardClick: _handleKeyboardClick,
               isPassword: false,
               hintText: "Enter Name",
             ),
@@ -84,6 +92,9 @@ class _BeautifulViewState extends State<BeautifulView> {
               controller: _passwordController,
               isPassword: true,
               hintText: "Enter your password",
+              focusNode: _passwordFocus,
+              onKeyboardClick: _handleKeyboardClick,
+              onSubmitted: _validateAndSubmit, // Call validation on Enter
             ),
             SizedBox(height: 60),
             GenericTextButton(text: "Submit", onPressed: _validateAndSubmit)
