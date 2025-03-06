@@ -203,7 +203,7 @@ class _BeautifulViewState extends State<BeautifulView> {
                 focusNode: _nameFocus,
                 icon: Icons.person,
                 textInputAction: TextInputAction.next,
-                hintText: "Enter Name",
+                hintText: "Enter your name",
                 errorText: nameError,
                 keyboardType: TextInputType.name,
               ),
