@@ -50,9 +50,14 @@
 //   }
 
 import 'dart:developer';
+import 'package:first_trial/bloc/authBloc.dart';
+import 'package:first_trial/bloc/events.dart';
+import 'package:first_trial/bloc/states.dart';
+import 'package:first_trial/screens/homeScreen.dart';
 import 'package:first_trial/widgets/genericTextfield.dart';
 import 'package:first_trial/widgets/genericTextButton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class BeautifulView extends StatefulWidget {
@@ -169,71 +174,98 @@ class _BeautifulViewState extends State<BeautifulView> {
         backgroundColor: Colors.blueGrey,
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Email Field
-              Text("Email",
-                  style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 6, 30, 82))),
-              SizedBox(height: 5),
-              Generictextfield(
-                controller: _emailController,
-                focusNode: _emailFocus,
-                icon: Icons.email,
-                textInputAction: TextInputAction.next,
-                hintText: "Enter email",
-                errorText: emailError,
-                keyboardType: TextInputType.emailAddress,
-              ),
-              SizedBox(height: 10),
+          child: BlocConsumer<Authbloc, AuthStates>(
+            listener: (context, state) {
+              if (state is AuthenticatedState) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => HomeScreen(email: state.userEmail)),
+                );
+              }
+              if (state is FailureState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.error)),
+                );
+              }
+            }, // TODO: implement listener
 
-              // Name Field
-              Text("Name",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                      color: Color.fromARGB(255, 6, 30, 82))),
-              SizedBox(height: 5),
-              Generictextfield(
-                controller: _nameController,
-                focusNode: _nameFocus,
-                icon: Icons.person,
-                textInputAction: TextInputAction.next,
-                hintText: "Enter your name",
-                errorText: nameError,
-                keyboardType: TextInputType.name,
-              ),
-              SizedBox(height: 10),
+            builder: (context, state) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Email Field
+                  Text("Email",
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 6, 30, 82))),
+                  SizedBox(height: 5),
+                  Generictextfield(
+                    controller: _emailController,
+                    focusNode: _emailFocus,
+                    icon: Icons.email,
+                    textInputAction: TextInputAction.next,
+                    hintText: "Enter email",
+                    errorText: emailError,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  SizedBox(height: 10),
 
-              // Password Field
-              Text("Password",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                      color: Color.fromARGB(255, 6, 30, 82))),
-              SizedBox(height: 5),
-              Generictextfield(
-                controller: _passwordController,
-                focusNode: _passwordFocus,
-                isPassword: true,
-                hintText: "Enter your password",
-                icon: Icons.lock,
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.visiblePassword,
-                errorText: passwordError,
-              ),
-              SizedBox(height: 60),
+                  // Name Field
+                  Text("Name",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                          color: Color.fromARGB(255, 6, 30, 82))),
+                  SizedBox(height: 5),
+                  Generictextfield(
+                    controller: _nameController,
+                    focusNode: _nameFocus,
+                    icon: Icons.person,
+                    textInputAction: TextInputAction.next,
+                    hintText: "Enter your name",
+                    errorText: nameError,
+                    keyboardType: TextInputType.name,
+                  ),
+                  SizedBox(height: 10),
 
-              // Submit Button
-              GenericTextButton(
-                text: "Submit",
-                onPressed: _validateAndSubmit,
-              ),
-            ],
+                  // Password Field
+                  Text("Password",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                          color: Color.fromARGB(255, 6, 30, 82))),
+                  SizedBox(height: 5),
+                  Generictextfield(
+                    controller: _passwordController,
+                    focusNode: _passwordFocus,
+                    isPassword: true,
+                    hintText: "Enter your password",
+                    icon: Icons.lock,
+                    textInputAction: TextInputAction.done,
+                    keyboardType: TextInputType.visiblePassword,
+                    errorText: passwordError,
+                  ),
+                  SizedBox(height: 60),
+                  if (state is LoadingState) CircularProgressIndicator(),
+                  // Submit Button
+                  GenericTextButton(
+                    text: "Submit",
+                    // onPressed: _validateAndSubmit,
+                    onPressed: () {
+                      final email = _emailController.text;
+                      final password = _passwordController.text;
+                      context.read<Authbloc>().add(LogInRequest(
+                            email: email,
+                            password: password,
+                          ));
+                    },
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),
