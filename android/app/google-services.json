@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "201938835845",
-    "project_id": "beautifulview-authentication",
-    "storage_bucket": "beautifulview-authentication.firebasestorage.app"
+    "project_number": "29620036548",
+    "project_id": "first-firebase-project-d8604",
+    "storage_bucket": "first-firebase-project-d8604.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:201938835845:android:6b73ce8e173fa0d061ccec",
+        "mobilesdk_app_id": "1:29620036548:android:8dc9a5bac9fd0de0ef3a91",
         "android_client_info": {
           "package_name": "com.example.first_trial"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAiD1y2xhcAhj77FT66nxbfQ57CqZ-ea4I"
+          "current_key": "AIzaSyBd_UlIVh8Y27SVkvxwWUsJXquI2afTI-4"
         }
       ],
       "services": {

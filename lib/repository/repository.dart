@@ -6,9 +6,11 @@ class AuthRepository {
 
   AuthRepository(this._authService);
 
-  Future<User?> login(String email, String password) async {
-    return await _authService.signInWithEmail(email, password);
+  Future<User?> signUp(String email, String password) async {
+    return await _authService.createUserWithEmailAndPassword(email, password);
   }
+
+ 
 
   Future<void> logout() async {
     await _authService.signOut();

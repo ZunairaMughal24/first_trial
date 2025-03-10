@@ -179,8 +179,7 @@ class _BeautifulViewState extends State<BeautifulView> {
               if (state is AuthenticatedState) {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => HomeScreen(email: state.userEmail)),
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
                 );
               }
               if (state is FailureState) {
@@ -249,20 +248,26 @@ class _BeautifulViewState extends State<BeautifulView> {
                     errorText: passwordError,
                   ),
                   SizedBox(height: 60),
-                  if (state is LoadingState) CircularProgressIndicator(),
+
                   // Submit Button
+
                   GenericTextButton(
                     text: "Submit",
                     // onPressed: _validateAndSubmit,
                     onPressed: () {
                       final email = _emailController.text;
                       final password = _passwordController.text;
-                      context.read<Authbloc>().add(LogInRequest(
+                      final name = _nameController.text;
+                      context.read<Authbloc>().add(SignUpRequest(
                             email: email,
                             password: password,
+                            name: name,
                           ));
                     },
                   ),
+                  SizedBox(height: 20),
+                  if (state is LoadingState)
+                    Center(child: CircularProgressIndicator()),
                 ],
               );
             },
