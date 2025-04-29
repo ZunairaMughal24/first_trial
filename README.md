@@ -1,6 +1,6 @@
-# first_trial
+# first_Git_trial
 
-A new Flutter project.
+A new Flutter project for git revision.
 
 ## Getting Started
 
